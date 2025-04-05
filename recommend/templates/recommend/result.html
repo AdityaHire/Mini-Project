@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result - Medicine Recommendation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #e3f2fd, #f3f8ff);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: #007bff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #fff;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            border-radius: 0 0 50px 50px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .card-container {
+            max-width: 900px;
+            margin: auto;
+            margin-top: -50px;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .list-group-item {
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .list-group-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-custom {
+            background: linear-gradient(90deg, #007bff, #0056b3);
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            border-radius: 30px;
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-custom:hover {
+            background: linear-gradient(90deg, #0056b3, #003f80);
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background: #0056b3;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">MediMatch</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/about/">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/recommend/">Recommend</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <h1>Your Recommended Medicines</h1>
+        <p>Based on your symptoms, here are the best recommendations for you.</p>
+    </div>
+
+    <!-- Result Section -->
+    <div class="container card-container">
+        <h2 class="text-center mb-4" style="color:#0056b3; font-weight: bold;">For Symptoms: {{ symptoms }}</h2>
+
+        {% if medicines %}
+        <ul class="list-group">
+            {% for medicine in medicines %}
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+                <div>
+                    <h5 class="text-primary">{{ medicine.name }}</h5>
+                    <p><strong>Usage:</strong> {{ medicine.usage }}</p>
+                    <p><strong>Description:</strong> {{ medicine.description }}</p>
+                </div>
+                <span class="badge bg-success rounded-pill"><i class="fas fa-check"></i></span>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="text-danger text-center mt-4">No suitable medicine found.</p>
+        {% endif %}
+
+        <div class="text-center mt-4">
+            <a href="/recommend/" class="btn btn-custom">← Back to Recommendations</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 MediMatch | Your Health, Our Priority 💊</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
