@@ -152,7 +152,9 @@
                             <strong>{{ medicine.name }}</strong><br>
                             <small class="text-muted">{{ medicine.usage }}</small>
                         </div>
-                        <span class="badge bg-primary rounded-pill"><i class="fas fa-check"></i></span>
+                        <div>
+                            <a href="/buy/{{ medicine.id }}" class="btn btn-success btn-sm">Buy</a>
+                        </div>
                     </li>
                 {% endfor %}
             </ul>
